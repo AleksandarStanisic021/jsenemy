@@ -11,28 +11,28 @@ let ctx = canvas.getContext("2d");
 
 const CANVAS_WIDTH = (canvas.width = 500);
 const CANVAS_HEIGHT = (canvas.height = 1000);
-const numberOfEnemies = 100;
+const numberOfEnemies = 90;
 let gameFrame = 0;
-
-const EnemyImage1 = new Image();
-EnemyImage1.src = enemy1;
 
 class Enemy {
   constructor() {
-    this.x = Math.random() * CANVAS_WIDTH;
-    this.y = Math.random() * CANVAS_HEIGHT;
+    this.image = new Image();
+    this.image.src = enemy1;
 
-    this.speed = Math.random() * 4 - 2;
+    // this.speed = Math.random() * 4 - 2;
     this.spriteWidth = 293;
     this.spriteHeight = 155;
     this.width = this.spriteWidth / 3;
     this.height = this.spriteHeight / 3;
+    this.x = Math.random() * (canvas.width - this.width);
+    this.y = Math.random() * (canvas.height - this.height);
     this.frame = 0;
     this.flapSpeed = Math.floor(Math.random() * 3 + 1);
   }
   update() {
-    this.x += this.speed;
-    this.y += this.speed;
+    this.x += Math.random() * 7 - 2.5;
+    this.y += Math.random() * 7 - 2.5;
+
     if (this.y > CANVAS_HEIGHT) {
       this.y = 0;
     }
@@ -46,7 +46,7 @@ class Enemy {
   }
   draw() {
     ctx.drawImage(
-      EnemyImage1,
+      this.image,
       this.frame * this.spriteWidth,
       0,
       this.spriteWidth,
